@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        body
+      {
+        margin: 0px;
+        padding: 0px;
+        font-family: sans-serif;
+        background: #191919;
+        width: 100%;
+        height: 100%;
+        color: white;
+      }
+      .container
+      {
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90%;
+        background: #191919;
+        font-family: cursive;
+      }
+      .container h1, .container h2
+    {
+      color: white;
+      font-family: cursive;
+      text-align: center;
+      display: block;
+      margin: 20px auto;
+      user-select: none;
+    }
+    .noteContainer
+    {
+      background: none;
+      border: 2px solid white;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: center;
+    }
+    .noteContainer p
+    {
+      user-select: none;
+    }
+    .checkproceed
+    {
+      background: none;
+      border: 2px solid white;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: center;
+
+    }
+    .checkproceed input[type="submit"]
+    {
+      display: block;
+      margin: 20px auto;
+      border-radius: 24px;
+      padding: 14px 10px;
+      width: 100px;
+      outline: none;
+      background: none;
+      text-align: center;
+      font-family: cursive;
+      color: white;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    
+    .checkproceed input[value="view_results"]
+    {
+      border: 2px solid #2ecc71;
+    }
+    .checkproceed input[value="Cancel"]
+    {
+      border: 2px solid #ff084e;
+    }
+    .checkproceed input[value="view_results"]:hover,
+    .checkproceed input[value="view_results"]:focus
+    {
+      background: #2ecc71;
+      width: 180px;
+    }
+    .checkproceed input[value="Cancel"]:hover,
+    .checkproceed input[value="Cancel"]:focus
+    {
+      background: #ff084e;
+      width: 180px;
+    }
+    </style>
+    <body>
+        <div class="container">
+            <h1>Xamineer</h1>
+            <h2>Welcome {{student[0][0]}}</h2><br>
+            {% for row in data %}
+            <div class="noteContainer">
+                <p id="note"><b style="color:#ec6409">Instructions</b></p>
+                <p>Your teacher <b style="color:dodgerblue">{{row[0]}} </b>has created an xamineer quiz {{row[1]}} for <b style="color:dodgerblue">{{student[0][0]}}.</b></p>
+                <p><b style="color:rgb(204, 46, 46)">{{something}}</b></p><br>
+                <p>For any queries contact your teacher <b style="color:dodgerblue">{{row[0]}}</b></p><br>
+                <div class="checkproceed">
+                    <form class="dwnld" action="/download" method="POST" onsubmit="return checkbox(this);">
+                        <p>check your quiz_Id: <input type="text" name="QuizId" style="width:auto;" value="{{row[1]}}"></p>
+                        <p>check your email  : <input type="text" name="email" style="width: 170px;" value="{{student[0][1]}}"></p>
+                        <input type="checkbox" name="agree"/>check your data and agree to view results for quiz {{row[1]}}
+                        <input type="submit" value="view Response Sheet"/>
+                    </form>
+                    <input type="submit" name="" value="Cancel" onclick="window.location.href='/index' ">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+<script>
+      function checkbox(form)
+      {
+          if (!form.agree.checked)
+          {
+              alert("make sure you read all instructions and marked checkbox");
+              form.agree.focus();
+              return false;
+          }
+          return true;
+      }
+</script>
+</html>

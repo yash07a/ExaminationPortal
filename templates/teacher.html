@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport"
+    content="width=screen-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Examination Portal</title>
+    <style media="screen">
+    body
+    {
+      margin: 0px;
+      padding: 0;
+      font-family: sans-serif;
+      background: #191919;
+      width: 100%;
+    }
+    .container
+    {
+      position: absolute;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+      height: 100vh;
+      width: 90vw;
+      /* align-items: center; */
+      /* text-align: center; */
+      background: #191919;
+    }
+    h1
+    {
+      text-align: center;
+      font-family: cursive;
+      font-weight:bold;
+      color: #ffff;
+      user-select: none;
+    }
+    .stuTea
+    {
+      border: dodgerblue solid 2px;
+      border-radius: 34px;
+      width: 250px;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      outline: none;
+    }
+    .studentButton
+    {
+      border: none;
+      border-radius: 24px;
+      padding: 15px 10px;
+      width: 100px;
+      margin-right: 45px;
+      text-align: center;
+      background: none;
+      cursor: pointer;
+      outline: none;
+      font-family: cursive;
+      color: white;
+    }
+    .teacherButton
+    {
+      border: none;
+      border-radius: 24px;
+      padding: 15px 10px;
+      width: 100px;
+      text-align: center;
+      background: dodgerblue;
+      cursor: pointer;
+      outline: none;
+      font-family: cursive;
+      color: white;
+    }
+     .loginform
+    {
+
+      /* position: absolute;
+      left: 50%;
+      top: 60%; */
+      background: none;
+      /* transform: translate(-50%, -50%); */
+    }
+    .loginform input[type="text"], .loginform input[type="password"]
+    {
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 14px 10px;
+      width: 200px;
+      outline: none;
+      color: white;
+      font-family: cursive;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+    .loginform input[name="quizId"]
+    {
+      border: none;
+    }
+    .loginform input[type="text"]:hover,
+    .loginform input[type="password"]:hover,
+    .loginform input[type="text"]:focus,
+    .loginform input[type="password"]:focus
+    {
+        width: 280px;
+    }
+    .loginform input[type="submit"]
+    {
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #2ecc71;
+      padding: 14px 10px;
+      width: 100px;
+      outline: none;
+      color: white;
+      font-family: cursive;
+      border-radius: 24px;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+    .loginform input[type="submit"]:hover
+    {
+      width: 180px;
+      background: #2ecc71;
+    }
+    .loginform p
+    {
+      color: white;
+      font-family: cursive;
+      text-align: center;
+      user-select: none;
+    }
+    .loginform button[name="signUp"]
+    {
+      background: none;
+      border: 0px;
+      font-family: cursive;
+      color: dodgerblue;
+      text-decoration: underline;
+      cursor: pointer;
+      outline: none;
+    }
+
+      .login-showPassword
+      {
+        color: white;
+				user-select: none;
+				font-family: cursive;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+      }
+      .loginform input[type="checkbox"]
+			{
+				margin-left: 0px;
+        margin-right: 10px;
+			}
+	  .container h1[name="app"]
+	  {
+	    background: linear-gradient(to right, red, purple, blue);
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+	  }
+    </style>
+  </head>
+  <body onload="checkUserNPassword()">
+    <div class="container">
+      <h1 name="app">Examination Portal</h1>
+      <h1>Login</h1>
+        <div class="stuTea">
+          <button type="button" name="button" class="studentButton"
+          id="studentButton" onclick="teaToStu()">Student</button>
+          <button type="button" name="button" class="teacherButton"
+          onclick="stuToTea()" id="teacherButton">Teacher</button>
+        </div>
+
+      <div class="loginform">
+        <form action="/login" method="post">
+          <input type="text" name="quizId" value="" placeholder="Quiz Id"
+          autocomplete="off" disabled>
+        <input type="text" name="username" value="" placeholder="Username"
+        autocomplete="off" required>
+        <input type="password" name="password" value="" placeholder="Password"
+        autocomplete="off" required>
+        <label class="login-showPassword">
+					<input type="checkbox" name="loginShowPassword" onclick="showPwd()">Show Password</label>
+        <br>
+        <input type="submit" name="" value="Login"></form>
+        <br>
+        <form action="/signup" method="get">
+        <p name="dontHAA">Don't have an account?
+        <button type="submit" name="signUp">Signup</button></p></form>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+
+  function stuToTea()
+  {
+    var x = document.getElementById("studentButton");
+    x.style.backgroundColor='#191919';
+    var y = document.getElementById("teacherButton");
+    y.style.backgroundColor='dodgerblue';
+    var z = document.getElementsByName("quizId")[0];
+    z.style.border = 0;
+    z.placeholder="";
+    z.removeAttribute("required");
+    var ptag = document.getElementsByName("dontHAA")[0];
+    ptag.style.color="white";
+    var signuptag = document.getElementsByName("signUp")[0];
+    signuptag.style.color = "dodgerblue";
+  }
+  function teaToStu()
+  {
+    var x = document.getElementById("studentButton");
+    x.style.backgroundColor='dodgerblue';
+    var y = document.getElementById("teacherButton");
+    y.style.backgroundColor='#191919';
+    var z = document.getElementsByName("quizId")[0];
+    z.style.border = "2px solid #3498db";
+    z.placeholder="Quiz Id";
+    z.setAttribute("required", "");
+    var ptag = document.getElementsByName("dontHAA")[0];
+    ptag.style.color="#191919";
+    var signuptag = document.getElementsByName("signUp")[0];
+    signuptag.style.color = "#191919";
+  }
+  function checkUserNPassword()
+  {
+    var z = document.getElementsByName("quizId")[0];
+    z.style.border = 0;
+    z.placeholder="";
+    z.removeAttribute("required");
+    document.getElementsByName("username")[0].value = "{{uName}}";
+    document.getElementsByName("password")[0].value = "{{pwd}}";
+    if("{{userNotFound}}" == "True")
+    {
+        alert("User not found...");
+    }
+    if("{{wrngPwd}}" == "True")
+    {
+        alert("Wrong password...");
+    }
+  }
+  function showPwd()
+	{
+	  var x = document.getElementsByName("password")[0];
+	  if (x.type == "password")
+	  {
+		x.type = "text";
+	  }
+		else
+	  {
+		x.type = "password";
+	  }
+	}
+
+  </script>
+</html>

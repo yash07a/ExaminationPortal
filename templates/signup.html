@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=screen-width initial-scale=1">
+		<title>Examination Portal| Signup</title>
+		<style media="screen">
+			body
+			{
+				margin: 0px;
+				padding: 0;
+				font-family: sans-serif;
+				background: #191919;
+				width: 100vw;
+			}
+			.container-signup
+      {
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90vw;
+        align-items: center;
+        background: #191919;
+      }
+			.container-signup h1[name="app"]
+			{
+				background: linear-gradient(to right, red, purple, blue);
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+				text-align: center;
+				font-family: cursive;
+				font-weight: bold;
+				color: white;
+				user-select: none;
+			}
+			.container-signup h1
+			{
+				text-align: center;
+				font-family: cursive;
+				font-weight: bold;
+				color: white;
+				user-select: none;
+			}
+			.signup-form input[type="text"],
+			.signup-form input[type="tel"],
+			.signup-form input[type="email"],
+			.signup-form input[type="password"]
+			{
+				background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.25s;
+			}
+			.signup-form input[type="text"]:hover,
+			.signup-form input[type="tel"]:hover,
+			.signup-form input[type="email"]:hover,
+			.signup-form input[type="password"]:hover,
+			.signup-form input[type="text"]:focus,
+			.signup-form input[type="tel"]:focus,
+			.signup-form input[type="email"]:focus,
+			.signup-form input[type="password"]:focus
+			{
+				width: 280px;
+			}
+			.signup-form input[type="submit"]
+			{
+				background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 10px;
+        width: 100px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+			}
+			.signup-form input[type="submit"]:hover
+			{
+				width: 180px;
+				background: #2ecc71;
+			}
+			.signup-form input[name="signupCancel"]
+			{
+				background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #fc1c79;
+        padding: 14px 10px;
+        width: 100px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+			}
+			.signup-form input[name="signupCancel"]:hover
+			{
+				width: 180px;
+				background: #fc1c79;
+			}
+			.passwordtest > p
+			{
+				color: white;
+				user-select: none;
+			}
+			.passwordtest
+			{
+				font-size: 10px;
+				font-family: cursive;
+				margin: 20px auto;
+				display: block;
+				text-align: center;
+			}
+			.showPassword
+			{
+				color: white;
+				user-select: none;
+				font-family: cursive;
+				margin: 20px auto;
+			}
+			.signup-headings
+			{
+				margin: 20px auto;
+			}
+			.showPasswordcheck
+			{
+				text-align: center;
+				margin: 20px auto;
+			}
+		</style>
+	</head>
+	<body onload="checkMobile()">
+		<div class="container-signup">
+			<div class="signup-headings">
+				<h1 name="app">Examination Portal</h1>
+				<h1>Sign Up</h1>
+			</div>
+			<div class="signup-form">
+				<form action="/signup" method="post">
+					<input type="email" name="emailId" autocomplete="off" placeholder="Email Id" required>
+					<input type="text" name="fName" autocomplete="off" placeholder="First Name" required>
+					<input type="text" name="lName" autocomplete="off" placeholder="Last Name" required>
+					<input type="tel" name="mobile" autocomplete="off" placeholder="Mobile" required>
+					<input type="text" name="subject" autocomplete="off" placeholder="Subject" required>
+					<input type="text" name="institutionName" autocomplete="off" placeholder="Institution" required>
+					<input type="password" name="signupPassword" placeholder="Password" required onkeyup="password()">
+					<div class="showPasswordcheck">
+						<label class="showPassword">
+						<input type="checkbox" name="showPassword" onclick="showPwd()">Show Password</label>
+					</div>
+					<!-- <input type="password" name="signup-repassword" placeholder="Re-type password" required> -->
+					<div class="passwordtest">
+						<p name="length">Password should have atleast <b>8 Characters</b> </p>
+						<p name="numeric">Password should have atleast <b>1 Numeric Character</b> </p>
+						<p name="upper">Password should have atleast <b>1 Uppercase Character</b></p>
+						<p name="special">Password should have atleast <b>1 Special Character</b> </p>
+					</div>
+					<input type="submit" name="sign-up-button" value="Signup">
+				</form>
+					<input type="submit" onclick="window.location.href='{{url_for('index')}}'" name="signupCancel" value="Cancel">
+
+			</div>
+		</div>
+	</body>
+<script type="text/javascript">
+	function password()
+	{
+		var x = document.getElementsByName("signupPassword")[0].value;
+		if(x.length >= 8)
+		{
+			document.getElementsByName("length")[0].style.color = "#03fc90";
+			document.getElementsByName("numeric")[0].style.color = "#fc0367";
+			document.getElementsByName("upper")[0].style.color = "#fc0367";
+			document.getElementsByName("special")[0].style.color = "#fc0367";
+
+		}
+		else
+		{
+			document.getElementsByName("length")[0].style.color = "#fc0367";
+			document.getElementsByName("numeric")[0].style.color = "#fc0367";
+			document.getElementsByName("upper")[0].style.color = "#fc0367";
+			document.getElementsByName("special")[0].style.color = "#fc0367";
+		}
+		for (var i = 0; i < x.length; i++)
+		{
+			if (x.codePointAt(i) <=57 && x.codePointAt(i) >= 48)
+			{
+				document.getElementsByName("numeric")[0].style.color = "#03fc90";
+			}
+		}
+		for (var i = 0; i < x.length; i++)
+		{
+			if (x.codePointAt(i) <=90 && x.codePointAt(i) >= 65)
+			{
+				document.getElementsByName("upper")[0].style.color = "#03fc90";
+			}
+		}
+		for (var i = 0; i < x.length; i++)
+		{
+			if ((x.codePointAt(i) <=47 && x.codePointAt(i) >= 33) ||
+			(x.codePointAt(i) <=64 && x.codePointAt(i) >= 58) ||
+			(x.codePointAt(i) <=96 && x.codePointAt(i) >= 91) ||
+			(x.codePointAt(i) <=125 && x.codePointAt(i) >= 123))
+			{
+				document.getElementsByName("special")[0].style.color = "#03fc90";
+			}
+		}
+	}
+	function showPwd()
+	{
+	  var x = document.getElementsByName("signupPassword")[0];
+	  if (x.type == "password")
+	  {
+		x.type = "text";
+	  }
+		else
+	  {
+		x.type = "password";
+	  }
+	}
+	function checkMobile()
+	{
+		document.getElementsByName("emailId")[0].value = "{{emailId}}";
+		document.getElementsByName("fName")[0].value = "{{fName}}";
+		document.getElementsByName("lName")[0].value = "{{lName}}";
+		document.getElementsByName("mobile")[0].value = "{{mobile}}";
+		document.getElementsByName("subject")[0].value = "{{subject}}";
+		document.getElementsByName("institutionName")[0].value = "{{institutionName}}";
+		document.getElementsByName("signupPassword")[0].value = "{{signupPassword}}";
+		if("{{valueOfMobile}}" == "False")
+		{
+			alert("Check mobile number");
+		}
+		if("{{invalidMobile}}" == "True")
+		{
+			alert("Invalid Mobile Number...");
+		}
+		if("{{lengthOfPassword}}" == "False")
+		{
+			alert("Password should have atleast 8 Characters...");
+		}
+		if("{{numericCharacter}}" == "False")
+		{
+			alert("Password should have atleast 1 Numeric Character...");
+		}
+		if("{{upperCase}}" == "False")
+		{
+			alert("Password should have atleast 1 Uppercase Character...");
+		}
+		if("{{specialCharacter}}" == "False")
+		{
+			alert("Password should have atleast 1 Special Character...");
+		}
+		if("{{invalidChar}}" == "True")
+		{
+			alert("~ is not allowed in password...");
+		}
+		if("{{noNetwork}}" == "True")
+		{
+			alert("Please Check your internet Connection...");
+		}
+		if("{{userExists}}" == "True")
+		{
+			alert("User Already Exists with this Email Please go back and Login...\nIncase if You forgot password click ForgotPassword Button to reset your password...")
+		}
+	}
+</script>
+
+</html>

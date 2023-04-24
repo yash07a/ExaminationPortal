@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Teacher | Create Quiz</title>
+    <style media="screen">
+      body
+      {
+        background: #191919;
+        margin: 0px;
+        padding: 0px;
+      }
+      .container
+      {
+        height: 100vh;
+        width: 90vw;
+        background: #191919;
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%, -50%);
+      }
+      .container input[type="text"],
+      .container input[type="datetime-local"]
+      {
+        display: block;
+        margin: 20px auto;
+        width: 150px;
+        /* border: 2px solid dodgerblue; */
+        border-radius: 24px;
+        border: none;
+        text-align: center;
+        padding: 14px 10px;
+        outline: none;
+        font-family: cursive;
+        transition: 0.5s;
+      }
+      .container input:hover,
+      .container input:focus
+      {
+        width: 180px;
+      }
+      .container label
+      {
+        color: white;
+        margin: 20px auto;
+        text-align: center;
+        display: block;
+        font-family: cursive;
+      }
+      .container input[name="createQuiz"]
+      {
+        width: 100px;
+        margin: 20px auto;
+        padding: 14px 10px;
+        display: block;
+        border: 2px solid #2ecc71;
+        border-radius: 24px;
+        background: none;
+        color: white;
+        font-family: cursive;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+      .container input[name="createQuizCancel"]
+      {
+        width: 100px;
+        margin: 20px auto;
+        padding: 14px 10px;
+        display: block;
+        border: 2px solid #fc086e;
+        border-radius: 24px;
+        background: none;
+        color: white;
+        font-family: cursive;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+      .container input[name="createQuiz"]:hover,
+      .container input[name="createQuiz"]:focus
+      {
+        background: #2ecc71;
+        width: 180px;
+      }
+      .container input[name="createQuizCancel"]:hover,
+      .container input[name="createQuizCancel"]:focus
+      {
+        background: #fc086e;
+        width: 180px;
+      }
+      .container textarea[name="instructions"]
+      {
+        border-radius: 24px;
+        outline: none;
+        font-family: cursive;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+        /* overflow: visible; */
+      }
+      .container h1[name="app"]
+      {
+        user-select: none;
+        color: white;
+        font-family: cursive;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+        background: linear-gradient(to right, red, purple, blue);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 name="app">Examination Portal</h1>
+      <form class="createQuizClass" action="/CreateQuiz" method="post">
+        <label name="noOfQues">No Of Questions</label>
+        <input type="text" name="NoOfQuestions" placeholder="No Of Questions" required>
+        <label name="startTime">Start Time</label>
+        <input type="datetime-local" name="startTime" placeholder="Start Time" required>
+        <label name="endTime">End Time</label>
+        <input type="datetime-local" name="endTime" placeholder="End Time" required>
+        <label name="crctAnswer">Marks for Correct Answer</label>
+        <input type="text" name="crctAns" placeholder="Marks for Correct Answer" required>
+        <label name="wrngAnswer">Marks for Wrong Answer</label>
+        <input type="text" name="wrngAns" placeholder="Marks for Wrong Answer" required>
+        <label name="instructions">Instructions</label>
+        <textarea name="instructions" rows="8" cols="40" required placeholder="Instructions"></textarea>
+        <br>
+        <input type="submit" name="createQuiz" value="Create Quiz">
+        <input type="submit" name="createQuizCancel" value="Cancel" onclick="window.location.href='{{url_for('teacherHome')}}'">
+      </form>
+    </div>
+  </body>
+  <script type="text/javascript">
+    function createQCancel()
+    {
+      document.getElementsByClassName("createQuizClass")[0].action = "";
+    }
+  </script>
+</html>

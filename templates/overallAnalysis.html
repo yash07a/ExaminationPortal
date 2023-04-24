@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Overall Analysis</title>
+    <style media="screen">
+      body
+      {
+        background: #191919;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        font-family: cursive;
+        color: white;
+      }
+      .container
+      {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        background: #191919;
+        width: 100vw;
+        height: 100vh;
+        transform: translate(-50%, -50%);
+        display: block;
+      }
+      .container h1
+      {
+        text-align: center;
+        display: block;
+        margin: 20px auto;
+        background: linear-gradient(to right, red, purple, blue);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+      .innerContainer
+      {
+        width: 100%;
+        height: 200px;
+        /* background: blue; */
+        margin: 20px auto;
+        display: flex;
+        overflow: auto;
+      }
+      .box
+      {
+        width: 33%;
+        height: 100px;
+        /* background: red; */
+        margin: 25px;
+        border: 2px solid dodgerblue;
+        border-radius: 24px;
+        padding: 14px 10px;
+      }
+      .box p
+      {
+        text-align: center;
+      }
+      input[type=submit]
+      {
+        background: none;
+        width: 100px;
+        color: white;
+        font-family: cursive;
+        padding: 14px 10px;
+        border-radius: 24px;
+        display: block;
+        margin: 20px auto;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+      form input[name="DetailedAnalysis"]
+      {
+        width: 180px;
+        border: 2px solid #2ecc71;
+      }
+      form input[name="DetailedAnalysis"]:hover,
+      form input[name="DetailedAnalysis"]:focus
+      {
+        width: 260px;
+        background: #2ecc71;
+      }
+      input[name="Cancel"]
+      {
+        width: 100px;
+        border: 2px solid #ff1255;
+      }
+      input[name="Cancel"]:hover,
+      input[name="Cancel"]:focus
+      {
+        width: 180px;
+        background: #ff1255;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Overeall Analysis</h1>
+      <div class="innerContainer">
+        <div class="box">
+          <p>No of Students Invited for the exam</p>
+          <p>{{noOfStudentsInvited}}</p>
+        </div>
+        <div class="box">
+          <p>No of Students attempted the exam</p>
+          <p style="color: #2ecc71">{{noOfStudentsAttempted}}</p>
+        </div>
+        <div class="box">
+          <p>No of Students Skipped the exam</p>
+          <p style="color: #ff1255">{{noOfStudentsSkipped}}</p>
+        </div>
+      </div>
+      <div class="innerContainer">
+        <div class="box">
+          <p>Average Mark</p>
+          <p>{{avgMark}}</p>
+        </div>
+        <div class="box">
+          <p>No of Students Whose Marks >= Avg Mark</p>
+          <p style="color: #2ecc71">{{aboveAvg}}</p>
+        </div>
+        <div class="box">
+          <p>No of Students Whose Marks < Avg Mark</p>
+          <p style="color: #ff1255">{{belowAvg}}</p>
+        </div>
+      </div>
+      <form class="" action="/detailedAnalysis" method="post">
+        <input type="submit" name="DetailedAnalysis" value="View Detailed Analysis">
+      </form>
+      <input type="submit" name="Cancel" value="Back" onclick="window.location.href='{{url_for('teacherHome')}}'">
+
+    </div>
+  </body>
+</html>

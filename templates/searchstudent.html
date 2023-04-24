@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>students results</title>
+    <style media="screen">
+      form input[name="QuizId"]
+      {
+        background: none;
+        outline: none;
+        border: 2px solid dodgerblue;
+        border-radius: 24px;
+        padding: 14px 10px;
+        color: white;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        transition: 0.5s;
+      }
+      body
+			{
+				margin: 0px;
+				padding: 0;
+				font-family: sans-serif;
+				background: #191919;
+				width: 100vw;
+			}
+      form input[name="searchstudent"]
+      {
+        /* position: middle; */
+        width: 180px;
+        /* height: 40px; */
+        border: 2px solid dodgerblue;
+        border-radius: 24px;
+        padding: 14px 10px;
+        outline: none;
+        font-family: cursive;
+        background: none;
+        color: white;
+      }
+      form input[name="DetailedAnalysis"]
+      {
+        border-radius: 50px;
+        position:middle;
+        width: 60px;
+        height: 40px;
+        border: 2px solid #ff1255;
+        background: none;
+        transition: 0.5s;
+        color: white;
+        font-family: cursive;
+      }
+      form input[name="DetailedAnalysis"]:hover,
+      form input[name="DetailedAnalysis"]:focus
+      {
+        background: #ff1255;
+      }
+      form input[name="Download"]
+      {
+        width: auto;
+        padding: 14px 10px;
+        border: 2px solid #2ecc71;
+        background: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        margin: 20px auto;
+        transition: 0.5s;
+      }
+      form input[name="Download"]:hover,
+      form input[name="Download"]:focus
+      {
+        background: #2ecc71;
+      }
+      form input[name="cancel"]
+      {
+        border-radius: 24px;
+        color: white;
+        width: 180px;
+        padding: 14px 10px;
+        font-family: cursive;
+        border: 2px solid #ff1255;
+        background: none;
+        transition: 0.5s;
+      }
+      form input[name="cancel"]:hover,
+      form input[name="cancel"]:focus
+      {
+        background: #ff1255;
+      }
+      h1[name="title"]
+      {
+        text-align: center;
+        color: white;
+        font-family: cursive;
+        margin: 20px auto;
+        background: linear-gradient(to right, red, purple, blue);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+      table.center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+    </style>
+    <body><br>
+      <h1 name="title">Examination Portal</h1><br>
+          <form class="search" action="" method="post" style="text-align: center;">
+              <input type="text" placeholder=" Search for particular student" name="searchstudent">
+              <input type="submit" name="DetailedAnalysis" value="search" >
+          </form><br>
+        <style>
+        td{
+            width:150px;
+            text-align: center;
+            border:1px solid;
+            padding:10px;
+            color: white;
+        }
+    </style>
+    <table class=center>
+        <tbody>
+          <tr>
+            <td style="background-color:navy">student_name</td>
+            <td style=" background-color:navy">marks</td>
+          </tr>
+            {% for row in data %}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table><br>
+
+    <form class="" action="/download_data" method="post" style="text-align: center">
+        <input type="submit" name="Download" value="download all student data">
+      </form>
+      <form class="" action="/viewResults" method="post" style="text-align: center">
+        <input type="submit" name="cancel" value="back">
+      </form>
+    </body>
+
+</html>

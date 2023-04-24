@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>instructions</title>
+    <style media="screen">
+      body
+      {
+        margin: 0px;
+        padding: 0px;
+        font-family: sans-serif;
+        background: #191919;
+        width: 100%;
+        height: 100%;
+        color: white;
+      }
+      .container
+      {
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90%;
+        background: #191919;
+        font-family: cursive;
+      }
+      .container h1, .container h2
+    {
+      color: white;
+      font-family: cursive;
+      text-align: center;
+      display: block;
+      margin: 20px auto;
+      user-select: none;
+    }
+    .noteContainer
+    {
+      background: none;
+      border: 2px solid white;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: center;
+    }
+    .noteContainer p
+    {
+      user-select: none;
+    }
+    .checkproceed
+    {
+      background: none;
+      border: 2px solid white;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: center;
+
+    }
+    .checkproceed input[type="submit"]
+    {
+      display: block;
+      margin: 20px auto;
+      border-radius: 24px;
+      padding: 14px 10px;
+      width: 100px;
+      outline: none;
+      background: none;
+      text-align: center;
+      font-family: cursive;
+      color: white;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    
+    .checkproceed input[value="proceed"]
+    {
+      border: 2px solid #2ecc71;
+    }
+    .checkproceed input[value="Cancel"]
+    {
+      border: 2px solid #ff084e;
+    }
+    .checkproceed input[value="proceed"]:hover,
+    .checkproceed input[value="proceed"]:focus
+    {
+      background: #2ecc71;
+      width: 180px;
+    }
+    .checkproceed input[value="Cancel"]:hover,
+    .checkproceed input[value="Cancel"]:focus
+    {
+      background: #ff084e;
+      width: 180px;
+    }
+    table {
+        margin-left: auto; 
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Xamineer</h1>
+      <h2>Welcome {{student[0][0]}}</h2><br>
+      <div class="noteContainer">
+        <p id="note"><b style="color:red">Instructions</b></p>
+        <p>Your teacher <b style="color:dodgerblue">{{data[0][0]}} </b>has created an xamineer quiz {{data[0][1]}} for <b style="color:dodgerblue">{{student[0][0]}}.</b></p>
+        <p><b style="color:#2ecc71">You will find details below:-</b>.</p><br>
+        <p><b style="color:red">-> Quiz is valid for only for limited time.</b></p>
+        <p><b style="color:red">-> Login with in given time.</b></p>
+        <p><b style="color:red">-> Submit quiz in time.</b></p>
+        <p><b style="color:red">-> If you close this webpage <b style="color: #ff084e;">/ open other webpage /</b> any other activities detection the quiz atomatically submit.</b></p>
+        <table>
+            <tbody>
+                <tr>
+                  <td style="background-color:navy">quiz_Id</td>
+                  <td style=" background-color:navy">{{data[0][1]}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:navy">start-time</td>
+                    <td style=" background-color:navy">{{data[0][3]}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:navy">end-time</td>
+                    <td style=" background-color:navy">{{data[0][4]}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:navy">each question carry marks</td>
+                    <td style=" background-color:navy">{{data[0][6]}}</td>
+                </tr>
+                <tr>
+                    <td style="background-color:navy">negitive marks for wrong answer</td>
+                    <td style=" background-color:navy">{{data[0][7]}}</td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+      <div class="noteContainer">
+        <p id="note"><b style="color:red">Instructions from teacher:-</b></p>
+        <p><b style="color:dodgerblue">{{data[0][5]}}</b></p><br>
+        <p><b style="color:#2ecc71">ALL THE BEST</b>.</p>
+      </div>
+      <div class="checkproceed">
+          <form class="testauto" action="/startquiz" method="POST" onsubmit="return checkbox(this);">
+            <b style="color: aqua;">your quiz starts in <div class="timer">
+              <p id="demo" style="color:red">Timer</p>
+            </div>
+            </b>
+              <p>check your quiz_Id: <input type="text" name="QuizId" value="{{data[0][1]}}"></p>
+              <p>check your email  : <input type="text" name="email" value="{{student[0][1]}}"></p>
+              <input type="checkbox" name="agree"/>I have read all instructions and agree to proceed
+              <input type="submit" value="proceed"/>
+          </form>
+          <input type="submit" name="" value="Cancel" onclick="window.location.href='/' ">
+      </div>
+    </div>
+  </body>
+  <script>
+      function checkbox(form)
+      {
+          if (!form.agree.checked)
+          {
+              alert("make sure you read all instructions and marked checkbox");
+              form.agree.focus();
+              return false;
+          }
+          return true;
+      }
+    var countDownDate = new Date("{{data[0][3]}}").getTime();
+    var x = setInterval(function()
+    {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("demo").innerHTML = hours + "h "
+        + minutes + "m " + seconds + "s ";
+        if (distance < 0)
+        {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "proceed to login";
+            document.getElementsByClassName("testauto")[0].action="/startquiz";
+            document.getElementsByClassName("testauto")[0].submit();
+            alert("QUIZ TIME STARTED, CHECK INSTRUCTIONS AND PROCEED");
+        }
+    }, 1000);
+  </script>
+</html>

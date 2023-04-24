@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xamineer | Teacher</title>
+    <style media="screen">
+    body
+      {
+        margin: 0px;
+        padding: 0px;
+        font-family: sans-serif;
+        background: #191919;
+        width: 100%;
+        height: 100%;
+        color: white;
+      }
+      .login-container
+      {
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90%;
+        background: #191919;
+        font-family: cursive;
+      }
+      .AddQuestion label
+      {
+        margin: 20px;
+        user-select: none;
+      }
+      .AddQuestion input[type="text"],
+      .AddQuestion input[type="list"]
+      {
+        /* margin-left: 30px; */
+        width: 300px;
+        /* margin: 10px; */
+        font-family: cursive;
+        outline: none;
+        transition: 0.5s;
+      }
+      .AddQuestion input[type="text"]:hover,
+      .AddQuestion input[type="list"]:hover,
+      .AddQuestion input[type="text"]:focus,
+      .AddQuestion input[type="list"]:focus
+      {
+        width: 380px;
+      }
+      .headerfort
+      {
+        width: 100%;
+        background: #4CAF50;
+        height: 50px;
+        padding-top: 20px;
+      }
+      .headerfort label
+      {
+        padding-top: 8px;
+        margin: 0px;
+      }
+      .headerfort input[type="submit"]
+      {
+        font-family: cursive;
+        padding-top: 0px;
+        margin-top: 0px;
+        cursor: pointer;
+        background: none;
+        outline: none;
+        border: 0px;
+        color: white;
+      }
+      .AddQuestion input[type="submit"]
+      {
+        font-family: cursive;
+        outline: none;
+        background: none;
+        border: 2px solid #2ecc71;
+        width: 100px;
+        padding: 14px 10px;
+        border-radius: 24px;
+        color: white;
+        cursor: pointer;
+        margin: 20px;
+        transition: 0.5s;
+        /* margin: 20px auto; */
+        /* display: block; */
+      }
+      .buttons
+      {
+        display: block;
+        /* background: red; */
+        margin: 20px auto;
+        text-align: center;
+      }
+      .AddQuestion input[type="submit"]:hover, .AddQuestion input[type="submit"]:focus
+      {
+        background: #2ecc71;
+      }
+      .headerfort form
+      {
+        display: inline;
+        margin: 20px 30px;
+
+      }
+      .AddQuestion input[type="text"],
+      .AddQuestion input[type="list"]
+      {
+        display: block;
+        border: 2px solid dodgerblue;
+        /* width: 465px; */
+        border-radius: 24px;
+        padding: 14px 10px;
+        margin: 20px auto;
+        background: none;
+        color: white;
+        text-align: center;
+      }
+      .AddQuestion input[name="CancelButton"]
+      {
+        font-family: cursive;
+        outline: none;
+        background: none;
+        border: 2px solid #fc086e;
+        width: 100px;
+        padding: 14px 10px;
+        border-radius: 24px;
+        color: white;
+        cursor: pointer;
+        margin: 20px;
+        transition: 0.5s;
+        margin: 20px auto;
+        display: block;
+      }
+      .AddQuestion input[name="CancelButton"]:hover,
+      .AddQuestion input[name="CancelButton"]:focus
+      {
+        background: #fc086e;
+      }
+    </style>
+  </head>
+  <body onload="prompts()">
+    <div class=login-container>
+      <div class="headerfort">
+        <label>Welcome {{username}}!
+<!--          <form class="createQuiz" action="index.html" method="post" name="createQuiz">-->
+<!--            <input type="submit" name="" value="Create Quiz" disabled>-->
+<!--          </form>-->
+<!--          <form class="ViewQuizAnalysis" action="index.html" method="post" name="ViewQuizAnalysis">-->
+<!--            <input type="submit" name="" value="View Analysis" disabled>-->
+<!--          </form>-->
+          <form class="logoutclass" action="/" method="post" name="logoutclass">
+        <input type="submit" value="Logout" onsubmit="index.html"></form></label>
+      </div>
+    <div class="AddQuestion">
+      <form class="addquestion" action="/add" method="post">
+        <input type="list" name="QuizId" value="" list="quizIdS" required placeholder="Quiz Id">
+        <datalist id="quizIdS">
+          {%for item in data%}
+            <option value="{{item.0}}"></option>
+          {%endfor%}
+        </datalist></label><br>
+        <input class="QuestionNumber" name="QuestionNumber" placeholder="Question Number" type="text" required></label><br>
+        <input class="Question" name="Question" placeholder="Question" type="text" required></label><br>
+        <input class="Option1" name="Option1" placeholder="Option 1" type="text" required></label><br>
+        <input class="Option2" name="Option2" placeholder="Option 2" type="text" required></label><br>
+        <input class="Option3" name="Option3" placeholder="Option 3" type="text" required></label><br>
+        <input class="Option4" name="Option4" placeholder="Option 4" type="text" required></label><br>
+        <input class="CorrectAnswer" name="CorrectAnswer" placeholder="Correct Answer" type="text" required></label><br>
+        <div class="buttons">
+          <input type="submit" name="" value="Add">
+          <input type="submit" name="" value="Update" onclick="updateFunction()">
+          <input type="submit" name="" value="Delete" onclick="deleteFunction()">
+          <input type="submit" name="" value="Show All" onclick="showAllFunction()"></form>
+          <input type="submit" name="CancelButton" value="Cancel" onclick="window.location.href='{{url_for('teacherHome')}}'">
+        </div>
+    </div>
+    </div>
+  </body>
+  <script>
+    function showAllFunction()
+    {
+      document.getElementsByName("QuestionNumber")[0].removeAttribute("required");
+      document.getElementsByName("Question")[0].removeAttribute("required");
+      document.getElementsByName("Option1")[0].removeAttribute("required");
+      document.getElementsByName("Option2")[0].removeAttribute("required");
+      document.getElementsByName("Option3")[0].removeAttribute("required");
+      document.getElementsByName("Option4")[0].removeAttribute("required");
+      document.getElementsByName("CorrectAnswer")[0].removeAttribute("required");
+      document.getElementsByClassName("addquestion")[0].action= "/showAll";
+    }
+    function deleteFunction()
+    {
+      document.getElementsByName("Question")[0].removeAttribute("required");
+      document.getElementsByName("Option1")[0].removeAttribute("required");
+      document.getElementsByName("Option2")[0].removeAttribute("required");
+      document.getElementsByName("Option3")[0].removeAttribute("required");
+      document.getElementsByName("Option4")[0].removeAttribute("required");
+      document.getElementsByName("CorrectAnswer")[0].removeAttribute("required");
+      document.getElementsByClassName("addquestion")[0].action="/delete";
+    }
+    function updateFunction()
+    {
+      document.getElementsByClassName("addquestion")[0].action= "/update";
+    }
+    function prompts()
+    {
+      if("{{noNetwork}}" == "True")
+      {
+          alert("Please Check your internet Connection...");
+      }
+      if("{{error}}" == "True")
+      {
+          alert("Crct should be either 1 or 2 or 3 or 4...");
+      }
+      if("{{full}}" == "True")
+      {
+         alert("No more questions allowed...");
+      }
+      if("{{questionAdded}}" == "True")
+      {
+        alert("Question Added Successfully...")
+      }
+      if("{{questionUpdated}}" == "True")
+      {
+        alert("Question Updated Successfully...")
+      }
+      if("{{questionDeleted}}" == "True")
+      {
+        alert("Question Deleted Successfully...")
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Teacher | View Analysis</title>
+    <style media="screen">
+      body
+      {
+        background: #191919;
+      }
+      .container
+      {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        height: 100vh;
+        background: #191919;
+        display: block;
+      }
+      .container h1
+      {
+        color: white;
+        margin: 20px auto;
+        display: block;
+        user-select: none;
+        font-family: cursive;
+        text-align: center;
+      }
+      .container label
+      {
+        color: white;
+        outline: none;
+        font-family: cursive;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        user-select: none;
+      }
+      .container input[type="list"]
+      {
+        background: none;
+        outline: none;
+        border: 2px solid dodgerblue;
+        border-radius: 24px;
+        padding: 14px 10px;
+        color: white;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        transition: 0.5s;
+      }
+      .container input[type="list"]:hover,
+      .container input[type="list"]:focus
+      {
+        width: 180px;
+      }
+      .container input[name="viewAnalysis"]
+      {
+        background: none;
+        outline: none;
+        border: 2px solid #2ecc71;
+        border-radius: 24px;
+        padding: 14px 10px;
+        color: white;
+        display: block;
+        margin: 20px auto;
+        width: 100px;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+      .container input[name="viewAnalysisCancel"]
+      {
+        background: none;
+        outline: none;
+        border: 2px solid #fc086e;
+        border-radius: 24px;
+        padding: 14px 10px;
+        color: white;
+        display: block;
+        margin: 20px auto;
+        width: 100px;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+      .container input[name="viewAnalysisCancel"]:hover,
+      .container input[name="viewAnalysisCancel"]:focus
+      {
+        width: 180px;
+        background: #fc086e;
+      }
+      .container input[name="viewAnalysis"]:hover,
+      .container input[name="viewAnalysis"]:focus
+      {
+        width: 180px;
+        background: #2ecc71;
+      }
+      .container h1[name="app"]
+      {
+        background: linear-gradient(to right, red, purple, blue);
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+      }
+    </style>
+  </head>
+  <body onload="prompts()">
+    <div class="container">
+      <h1 name="app">Examination Portal</h1>
+      <h1>Quiz Analysis</h1><br><br>
+      <form class="quizAnalysisClass" action="/viewAnalysis" method="post">
+        <label>Select Quiz Id</label>
+        <input type="list" name="QuizId" value="" list="quizIdS" placeholder="Quiz Id" required autocomplete="off">
+        <datalist id="quizIdS">
+          {%for item in data%}
+            <option value="{{item.0}}"></option>
+          {%endfor%}
+        </datalist>
+        <!-- <br> -->
+        <input type="submit" name="viewAnalysis" value="View Analysis">
+        <!-- <br> -->
+
+      </form>
+        <input type="submit" name="viewAnalysisCancel" value="Cancel"
+        onclick="window.location.href='{{url_for('teacherHome')}}'">
+    </div>
+  </body>
+  <script type="text/javascript">
+    function quizAnalysisCancelButton()
+    {
+      document.getElementsByClassName("quizAnalysisClass")[0].action="";
+    }
+    function prompts()
+    {
+      if("{{noNetwork}}" == "True")
+      {
+          alert("Please Check your internet Connection...");
+      }
+    }
+  </script>
+</html>

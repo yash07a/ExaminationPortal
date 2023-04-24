@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script>
+    <meta charset="utf-8">
+    <title>Teacher | Home</title>
+    <style media="screen">
+      body
+      {
+        background: #191919;
+      }
+      .buttonHolder
+      {
+        background: #191919;
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90vw;
+        display: block;
+        /* align-items: center; */
+        /* text-align: center; */
+        /* background: #191919; */
+      }
+      .buttonHolder input[type="submit"]
+      {
+        display: block;
+        outline: none;
+        cursor: pointer;
+        background: none;
+        /* border: 2px solid dodgerblue; */
+        border-radius: 44px;
+        padding: 34px 30px;
+        width: 200px;
+        margin: 20px auto;
+        font-family: cursive;
+        color: white;
+        transition: .5s;
+      }
+      .buttonHolder h1
+      {
+        user-select: none;
+        color: white;
+        font-family: cursive;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+      }
+      .buttonHolder input[type="submit"]:hover,
+      .buttonHolder input[type="submit"]:focus
+      {
+        width: 280px;
+      }
+      .buttonHolder input[name="CreateQuiz"]
+      {
+        border: 2px solid #2ecc71;
+      }
+      .buttonHolder input[name="CreateQuiz"]:hover,
+      .buttonHolder input[name="CreateQuiz"]:focus
+      {
+        background: #2ecc71;
+      }
+      .buttonHolder input[name="ModifyQuiz"]
+      {
+        border: 2px solid #1cc2ff;
+      }
+      .buttonHolder input[name="ModifyQuiz"]:hover,
+      .buttonHolder input[name="ModifyQuiz"]:focus
+      {
+        background: #1cc2ff;
+      }
+      .buttonHolder input[name="InviteStudents"]
+      {
+        border: 2px solid#ffc936;
+      }
+      .buttonHolder input[name="InviteStudents"]:hover,
+      .buttonHolder input[name="InviteStudents"]:focus
+      {
+        background: #ffc936;
+      }
+      .buttonHolder input[name="ViewResults"]
+      {
+        border: 2px solid #c800ff;
+      }
+      .buttonHolder input[name="ViewResults"]:hover,
+      .buttonHolder input[name="ViewResults"]:focus
+      {
+        background: #c800ff;
+      }
+      .buttonHolder input[name="ViewAnalysis"]
+      {
+        border: 2px solid #ff841f;
+      }
+      .buttonHolder input[name="ViewAnalysis"]:hover,
+      .buttonHolder input[name="ViewAnalysis"]:focus
+      {
+        background: #ff841f;
+      }
+      .buttonHolder input[name="Logout"]
+      {
+        border: 2px solid #fc086e;
+      }
+      .buttonHolder input[name="Logout"]:hover,
+      .buttonHolder input[name="Logout"]:focus
+      {
+        background: #fc086e;
+      }
+      .buttonHolder input[name="DeleteAccount"]
+      {
+        border: 2px solid #ff084e;
+      }
+      .buttonHolder input[name="DeleteAccount"]:hover,
+      .buttonHolder input[name="DeleteAccount"]:focus
+      {
+        background: #ff084e;
+      }
+      .buttonHolder h1[name="app"]
+      {
+        background: linear-gradient(to right, red, purple, blue);
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+      }
+    </style>
+  </head>
+  <body onload="prompts()">
+    <div class="buttonHolder">
+      <h1 name="app">Examination Portal</h1>
+      <h1>Welcome {{username}}</h1>
+      <br><br>
+      <form class="Teacherlogin" action="/CreateQuiz" method="get">
+        <input type="submit" name="CreateQuiz" value="Create Quiz">
+        <input type="submit" name="ModifyQuiz" value="Modify Quiz" onclick="modifyQuiz()">
+        <input type="submit" name="InviteStudents" value="Invite Students" onclick="inviteStudents()">
+        <input type="submit" name="ViewResults" value="View Results" onclick="viewResults()">
+        <input type="submit" name="ViewAnalysis" value="View Analysis" onclick="viewAnalysis()">
+        <input type="submit" name="Logout" value="Logout" onclick="logout()">
+        <input type="submit" name="DeleteAccount" value="Delete My Account" onclick="deleteAccount()">
+      </form>
+    </div>
+  </body>
+  <script type="text/javascript">
+    function modifyQuiz()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/modifyQuiz";
+      document.getElementsByClassName("Teacherlogin")[0].method="post";
+    }
+    function inviteStudents()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/inviteStudents";
+      document.getElementsByClassName("Teacherlogin")[0].method="get";
+    }
+    function viewResults()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/viewResults";
+      document.getElementsByClassName("Teacherlogin")[0].method="get";
+    }
+    function viewAnalysis()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/viewAnalysis";
+      document.getElementsByClassName("Teacherlogin")[0].method="get";
+    }
+    function logout()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/";
+      document.getElementsByClassName("Teacherlogin")[0].method="post";
+    }
+    function deleteAccount()
+    {
+      document.getElementsByClassName("Teacherlogin")[0].action="/deleteAccount";
+    }
+    function prompts()
+    {
+      if("{{noNetwork}}" == "True")
+      {
+          alert("Please Check your internet Connection...");
+      }
+      if("{{quizAdded}}" == "True")
+      {
+        alert("Quiz Created...\nQuiz id is {{quizId}}...\nUse Modify Quiz to Add Questions...");
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detailed Analysis</title>
+    <style>
+        body
+      {
+        background: #191919;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+      }
+        .container
+      {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        background: #191919;
+        width: 100vw;
+        height: 100vh;
+        transform: translate(-50%, -50%);
+        display: block;
+        border 2px solid dodgerblue;
+      }
+      .innerContainer
+      {
+        background: none;
+        width: 643px;
+        height: 672px;
+        border: 2px solid white;
+        margin: 20px auto;
+      }
+      p
+      {
+        color: white;
+        font-family: cursive;
+        margin: 20px auto;
+        text-align: center;
+      }
+      img
+      {
+        display: block;
+        margin: 20px auto;
+       }
+       input[type="submit"]
+       {
+         background: none;
+         width: 100px;
+         padding: 14px 10px;
+         border: 2px solid #ff1255;
+         border-radius: 24px;
+         display: block;
+         margin: 20px auto;
+         color: white;
+         font-family: cursive;
+         transition: 0.5s;
+       }
+       input[type="submit"]:hover,
+       input[type="submit"]:focus
+       {
+         width: 180px;
+         background: #ff1255;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{bar}}" alt="Bar Chart">
+        {%for url in urls%}
+          <div class="innerContainer">
+            <p>Question {{url.0}}</p>
+            <p style="text-align:left">No of Students Answered <b style="color:dodgerblue">{{url.1}}</b></p>
+            <p style="text-align:left">No of Students Answered Correctly <b style="color:#2ecc71">{{url.2}}</b></p>
+            <p style="text-align:left">No of Students Answered Wrongly <b style="color:#ff1255">{{url.3}}</b></p>
+            <img src="{{url.4}}" alt="Chart">
+          </div>
+        {%endfor%}
+        <input type="submit" name="Cancel" value="Back" onclick="window.location.href='{{url_for('clear')}}'">
+
+    </div>
+</body>
+</html>

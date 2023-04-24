@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Examination Portal</title>
+    <style media="screen">
+      body
+      {
+        background:#191919;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        color: white;
+      }
+      .container
+      {
+        background:#191919;
+        color: white;
+        font-family: cursive;
+        margin: 20px auto;
+        padding-left:100px;
+        display: block;
+        text-align: left;
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90vw;
+      }
+      .innerContainer
+      {
+        margin: 20px auto;
+        display: block;
+        background: #191919;
+        width: 100vw;
+        height: 88vh;
+      }
+      .container p
+      {
+        background: #191919;
+        color: white;
+        display: block;
+        margin: 20px auto;
+        user-select: none;
+      }
+      .container h1
+      {
+        color: white;
+        text-align: center;
+        font-family: cursive;
+        background: #191919;
+      }
+      #QuizDetails, td, tr
+      {
+        background: #191919;
+        color: white;
+        border: 2px solid white;
+        border-collapse: collapse;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Examination Portal</h1>
+      <div class="innerContainer">
+        <p>Hello {{student}},</p>
+        <p>Welcome to Examination Portal</p>
+        <p>You are invited to the following Quiz by <span style="color:dodgerblue">{{teacher}}</span> via Examination Portal</p>
+        <p>Quiz is valid for a limited time.</p>
+        <p>Quiz Details : </p>
+        <table id="QuizDetails">
+          <tbody>
+            <tr>
+              <td>Quiz Title</td>
+              <td>{{quizId}}</td>
+            </tr>
+            <tr>
+              <td>Valid From</td>
+              <td><span style="color:#2ecc71">{{startTime}}</span></td>
+            </tr>
+            <tr>
+              <td>Valid Upto</td>
+              <td><span style="color:red">{{endTime}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Use the below credinals to login to the Quiz...</p>
+        <p style="color:red">Please Login before <b>{{loginTime}}</b> otherwise
+        you cannot give your exam</p>
+        <table id="QuizDetails">
+          <tbody>
+            <tr>
+              <td>Quiz Id</td>
+              <td>{{quizId}}</td>
+            </tr>
+            <tr>
+              <td>Username</td>
+              <td>{{username}}</td>
+            </tr>
+            <tr>
+              <td>Password</td>
+              <td>{{password}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Do not reply to this email.For Quiz related issues please contact
+        your Quiz Master/ Teacher</p><br><br>
+      </div>
+    </div>
+  </body>
+</html>

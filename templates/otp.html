@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=screen-width initial-scale=1">
+    <title>Forgot Password</title>
+    <style media="screen">
+			body
+			{
+				margin: 0px;
+				padding: 0;
+				font-family: sans-serif;
+				background: #191919;
+				width: 100vw;
+			}
+      .otp
+      {
+        position: absolute;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 90vw;
+        align-items: center;
+        background: #191919;
+      }
+      .otp h1[name="app"]
+      {
+        background: linear-gradient(to right, red, purple, blue);
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+				text-align: center;
+				font-family: cursive;
+				font-weight: bold;
+				color: white;
+				user-select: none;
+      }
+      .otp h1
+      {
+        text-align: center;
+				font-family: cursive;
+				font-weight: bold;
+				color: white;
+				user-select: none;
+      }
+      .enterotp
+      {
+        color: white;
+				user-select: none;
+				font-family: cursive;
+				margin: 20px auto;
+        display: block;
+      }
+      .otpalign
+      {
+        margin: 20px auto;
+        text-align: center;
+      }
+      .container input[type="text"]
+      {
+        background: none;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 14px 10px;
+        width: 130px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.5s;
+      }
+      .container input[type="text"]:hover,
+      .container input[type="text"]:focus
+      {
+        width: 150px;
+      }
+      .container input[name="Enter"]
+      {
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 14px 10px;
+        width: 100px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+      .container input[name="Enter"]:hover,
+      .container input[name="Enter"]:focus
+      {
+        width: 180px;
+				background: #2ecc71;
+      }
+      .container input[name="cancel"]
+      {
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid red;
+        padding: 14px 10px;
+        width: 100px;
+        outline: none;
+        color: white;
+        font-family: cursive;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+      }
+      .container input[name="cancel"]:hover,
+      .container input[name="cancel"]:focus
+      {
+        width: 180px;
+        background: red;
+      }
+      .resend
+      {
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+      }
+      .resend p
+      {
+        display: inline;
+        color: white;
+        font-family: cursive;
+      }
+      .resend input[type="submit"]
+      {
+        display: inline;
+        background: none;
+        color: grey;
+        border: none;
+        text-decoration: underline;
+        padding: 14px 10px;
+        border-radius: 24px;
+        font-family: cursive;
+        outline: None;
+        cursor: pointer;
+      }
+      </style>
+    </head>
+    <body onload="prompts()">
+      <div class="otp">
+  			<div class="signup-headings">
+  				<h1 name="app">Examination Portal</h1><br>
+  				<h1>{{username}}</h1>
+  			</div>
+        <div class="container">
+          <form action="/otpenter" method="post">
+            <div class="otpalign">
+            <label class="enterotp">
+              Enter OTP </label><input type="text" name="OTP" value="" placeholder="One time Password" required>
+            </div>
+            <input type="submit" name="Enter" value="Enter">
+          </form>
+          <form class="cancelClass" action="/forgot" method="post">
+            <input type="submit" name="cancel" value="cancel">
+          </form>
+          <form class="resend" action="/resend" method="post">
+            <p id="demo"></p>
+            <input type="submit" name="Resend" value="Resend Otp" disabled>
+          </form>
+        </div></div>
+      </body>
+  <script type="text/javascript">
+    var countDownDate = new Date("{{Time}}").getTime();
+    console.log("{{Time}}");
+    var x = setInterval(function()
+    {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("demo").innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
+        if (distance <= 0)
+        {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "";
+            document.getElementsByName("Resend")[0].removeAttribute("disabled");
+            document.getElementsByName("Resend")[0].style.color="dodgerblue";
+        }
+    }, 1000);
+    function Back()
+    {
+      document.getElementsByName("cancel")[0].action = "/forgot";
+      document.getElementsByName("OTP").removeAttribute("required");
+    }
+    function Resend()
+    {
+      document.getElementsByName("resend")[0].action = "/resend";
+      document.getElementsByName("OTP").removeAttribute("required");
+    }
+    function prompts()
+    {
+      if("{{invalidotp}}"=="True")
+        {
+            alert("Incorrect Otp");
+        }
+    }
+
+  </script>

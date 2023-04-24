@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" content="initial-scale=1 width=device-width">
+    <title>Student Response</title>
+    <style media="screen">
+      body
+      {
+        background: #191919;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        user-select: none;
+      }
+      .container
+      {
+        background: #191919;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 50vh;
+        left:50vw;
+        transform: translate(-50%, -50%);
+        margin: 20px auto;
+        display: block;
+        font-family: cursive;
+        color: white;
+      }
+      .innerContainer
+      {
+        margin: 20px auto;
+        display: block;
+        background: #191919;
+        padding-left: 40px;
+      }
+      #Centered
+      {
+        color: white;
+        text-align: center;
+      }
+      .innerContainer table, td, tr
+      {
+        border: 2px solid white;
+        color: white;
+        border-collapse: collapse;
+      }
+      td, tr
+      {
+        padding: 5px;
+      }
+      .Questions
+      {
+        border: 2px solid white;
+        width: auto;
+        padding-left: 40px;
+        width: 700px;
+      }
+      .dot
+      {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background: #bbb;
+        display: inline-block;
+      }
+      /* width */
+    ::-webkit-scrollbar
+    {
+      width: 12px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track
+    {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb
+    {
+      background: grey;
+      border-radius: 10px;
+    }
+    input[type="submit"]
+    {
+      display: block;
+      margin: 20px auto;
+      background: none;
+      border: 2px solid #ff1255;
+      color: white;
+      font-family: cursive;
+      width: 100px;
+      padding: 14px 10px;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    input[type="submit"]:hover,
+    input[type="submit"]:focus
+    {
+      width: 180px;
+      background: #ff1255;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="innerContainer">
+        <p id="Centered">Studet Response</p>
+        Quiz Details <br>
+        <br>
+        <table class="HeadersofExam">
+          <tbody>
+            <tr>
+              <td>Quiz Id</td>
+              <td>{{quizId}}</td>
+            </tr>
+            <tr>
+              <td>Valid From</td>
+              <td>{{startTime}}</td>
+            </tr>
+            <tr>
+              <td>Valid Upto</td>
+              <td>{{endTime}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        Student details
+        <br><br>
+        <table>
+          <tbody>
+             <tr>
+               <td>Name</td>
+               <td>{{student}}</td>
+             </tr>
+             <tr>
+               <td>No of Questions</td>
+               <td>{{noOfQuestions}}</td>
+             </tr>
+             <tr>
+               <td>No of Questions Answered</td>
+               <td>{{noOfQuestionsAnswered}}</td>
+             </tr>
+             <tr>
+               <td>No Of Questions Answered Correctly</td>
+               <td>{{noOfQuestionsAnsweredCorrectly}}</td>
+             </tr>
+             <tr>
+               <td>No of Questions Answered Wrongly</td>
+               <td>{{noOfQuestionsAnsweredWrongly}}</td>
+             </tr>
+             <tr>
+               <td>No of Questions Skipped</td>
+               <td>{{noOfQuestionsSkipped}}</td>
+             </tr>
+             <tr>
+               <td>Total Marks</td>
+               <td>{{totalMarks}}</td>
+             </tr>
+          </tbody>
+        </table>
+        <br><br>
+        Indicators
+        <br><br>
+        <span class="dot" style="background: #ff1255"></span> --> Student Response
+        <br>
+        <span class="dot" style="background: dodgerblue"></span> --> Correct Answer
+        <br>
+        <span class="dot" style="background: #2ecc71"></span> --> If student Answered Correctly
+        <p>Responses</p>
+
+        {%for question in questions%}
+          <div class="Questions">
+            <p>{{question.0}}</p>
+            <p>{{question.1}}</p>
+            <p>(a) <span
+              {% if question.6 and question.10%}
+                style="color:#2ecc71"
+              {%else%}
+                {% if question.6%}
+                  style="color:{{question.6}}
+                {%endif%}"
+                {% if question.10%}
+                  style="color:{{question.10}}
+                {%endif%}"
+              {%endif%}>{{question.2}}
+              </span></p>
+            <p>(b) <span
+              {% if question.7 and question.11%}
+                style="color:#2ecc71"
+              {%else%}
+                {% if question.7%}
+                  style="color:{{question.7}}
+                {%endif%}"
+                {% if question.11%}
+                  style="color:{{question.11}}
+                {%endif%}"
+              {%endif%}>{{question.3}}</span></p>
+            <p>(c) <span
+              {% if question.8 and question.12%}
+                style="color:#2ecc71"
+              {%else%}
+                {% if question.8%}
+                  style="color:{{question.8}}
+                {%endif%}"
+                {% if question.12%}
+                  style="color:{{question.12}}
+                {%endif%}"
+              {%endif%}>{{question.4}}</span></p>
+            <p>(d) <span
+              {% if question.9 and question.13%}
+                style="color:#2ecc71"
+              {%else%}
+                {% if question.9%}
+                  style="color:{{question.9}}
+                {%endif%}"
+                {% if question.13%}
+                  style="color:{{question.13}}
+                {%endif%}"
+              {%endif%}>{{question.5}}</span></p>
+          </div>
+        {%endfor%}
+        <form class="backClass" action="/" method="post">
+          <input type="submit" name="Back" value="Back">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

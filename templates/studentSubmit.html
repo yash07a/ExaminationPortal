@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+    </script>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen" name="viewport" content="width=screen-width initial scale=1">
+      body
+      {
+        background: #191919;
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        color: white;
+        font-family:cursive;
+      }
+      .container
+      {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        padding-top: 50px;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      table
+      {
+        margin: 20px auto;
+
+      }
+      table, tr, td
+      {
+        padding: 5px;
+        border: 2px solid white;
+        border-collapse: collapse;
+      }
+      .download
+      {
+        background: none;
+        border: 2px solid #ff1255;
+        border-radius: 24px;
+        color: white;
+        font-family: cursive;
+        text-align: center;
+        width: 100px;
+        padding: 14px 10px;
+        margin: 20px auto;
+        transition: 0.5s;
+        outline: none;
+      }
+      .download:hover,
+      .download:focus
+      {
+        width: 180px;
+        background: #ff1255;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      Hello {{student}},
+      <p>Your exam was submitted Successfully...</p>
+      <br>
+      Quiz Details
+      <table>
+        <tr>
+          <td>Total Questions</td>
+          <td>{{totalQuestions}}</td>
+        </tr>
+        <tr>
+          <td>Number of Questions Answered</td>
+          <td>{{noOfQuestionsAnswered}}</td>
+        </tr>
+
+        <tr>
+          <td>Number of Questions Answered Correctly</td>
+          <td style="color:#2ecc71">{{noOfQuestionsAnsweredCorrectly}}</td>
+        </tr>
+        <tr>
+          <td>Number of Questions Answered Wrongly</td>
+          <td style="color: #ff1255">{{noOfQuestionsAnsweredWrongly}}</td>
+        </tr>
+        <tr>
+          <td>Number of Questions Skipped</td>
+          <td style="color:dodgerblue">{{noOfQuestionsSkipped}}</td>
+        </tr>
+      </table>
+      <br>
+      Marking Scheme
+      <table>
+        <tr>
+          <td>Marks for Correct Answer</td>
+          <td style="color:#2ecc71">{{cMarks}}</td>
+        </tr>
+        <tr>
+          <td>Marks for Wrong Answer</td>
+          <td style="color:#ff1255">{{wMarks}}</td>
+        </tr>
+        <tr>
+          <td>Marks for Skipped Questions</td>
+          <td style="color:dodgerblue">0</td>
+        </tr>
+      </table>
+        <p style="font-size: 30px">Total Marks</p>
+        <p style="font-size: 40px; color:{{color}}">{{marks}}</p>
+        <p>Response Sheet will be available after the End Time of the Exam or Quiz</p>
+        <form action="/" method="post">
+          <input type="submit" class="download" value="Back">
+        </form>
+    </div>
+  </body>
+</html>
